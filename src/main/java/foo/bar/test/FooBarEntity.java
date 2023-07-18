@@ -1,6 +1,7 @@
 package foo.bar.test;
 
-import foo.bar.test.FooBar2Entity.FooBar2EntityPK;
+import foo.bar.test.FooBarEntity.FooBar2EntityPK;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -9,19 +10,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "foo_bar2")
+@Table(name = "foo_bar")
 @IdClass(FooBar2EntityPK.class)
-public class FooBar2Entity implements Serializable {
+//@BatchSize(size = 1)
+public class FooBarEntity implements Serializable {
 
   @Id
+  @Column(columnDefinition = "VARCHAR(50) NOT NULL")
   public String key1;
   @Id
-  public String key2;
+  @Column(columnDefinition = "INT(10) UNSIGNED NOT NULL")
+  public long key2;
 
-  public FooBar2Entity() {
+  public FooBarEntity() {
   }
 
-  public FooBar2Entity(String key1, String key2) {
+  public FooBarEntity(String key1, Long key2) {
     this.key1 = key1;
     this.key2 = key2;
   }
@@ -29,21 +33,21 @@ public class FooBar2Entity implements Serializable {
   public static class FooBar2EntityPK implements Serializable {
 
     public String key1;
-    public String key2;
+    public Long key2;
 
     public FooBar2EntityPK() {
     }
 
-    public FooBar2EntityPK(String key1, String key2) {
+    public FooBar2EntityPK(String key1, Long key2) {
       this.key1 = key1;
       this.key2 = key2;
     }
 
     @Override
     public int hashCode() {
-      int hash = 3;
-      hash = 61 * hash + Objects.hashCode(this.key1);
-      hash = 61 * hash + Objects.hashCode(this.key2);
+      int hash = 7;
+      hash = 41 * hash + Objects.hashCode(this.key1);
+      hash = 41 * hash + Objects.hashCode(this.key2);
       return hash;
     }
 
